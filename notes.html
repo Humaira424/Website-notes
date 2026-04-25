@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnify Education - Notes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo-section">
+            <img src="assets/images/logo.png" alt="Learnify Logo">
+            <h1>Learnify Education</h1>
+        </div>
+        
+        <nav class="nav-links-center">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        </nav>
+
+        <div class="search-container">
+            <input type="text" id="navSearchInput" class="nav-search" placeholder="Search Subject..." onkeyup="searchFromNav()">
+            <span class="search-icon">🔍</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container" style="text-align: left;">
+        <h1 style="color: #d6336c; font-size: 36px; text-align: center;">Explore Learning Material</h1>
+        <br>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+            <select id="classFilter" class="filter-select" onchange="updateSubjects()">
+                <option value="All">Select Your Grade</option>
+                <option value="9th">Class 9th</option>
+                <option value="10th">Class 10th</option>
+                <option value="11th">Class 11th</option>
+                <option value="12th">Class 12th</option>
+            </select>
+
+            <select id="subjectFilter" class="filter-select" onchange="filterAllSections()">
+                <option value="All">Select Subject</option>
+                <!-- JS will populate this -->
+            </select>
+        </div>
+
+        <!-- Filtered Chapter Results (Hidden By Default) -->
+        <div id="filteredChapterResults" style="display: none;">
+            <h2 class="section-heading" id="resultsHeading">Your Subject Chapters</h2>
+            <div class="card-container" id="chaptersContainer">
+                <!-- JavaScript se asali chapters (1 to 14 waghera) yahan banenge -->
+            </div>
+        </div>
+
+        <!-- Default Sections (Show when no filter is applied) -->
+        <div id="defaultSections">
+            <!-- Featured Notes Section -->
+            <h2 class="section-heading">Featured Notes</h2>
+            <div class="card-container">
+                <div class="card note-item">
+                    <span class="badge badge-popular">Popular</span>
+                    <h3>10th Math Guess Paper</h3>
+                    <p>Class 10th | Math</p>
+                    <div class="button-group">
+                        <a href="#" class="btn btn-view" target="_blank">View Online</a>
+                        <a href="#" class="btn btn-download" download>Download</a>
+                    </div>
+                </div>
+                <div class="card note-item">
+                    <span class="badge badge-important">Important</span>
+                    <h3>Physics Numericals</h3>
+                    <p>Class 12th | Physics</p>
+                    <div class="button-group">
+                        <a href="#" class="btn btn-view" target="_blank">View Online</a>
+                        <a href="#" class="btn btn-download" download>Download</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recently Added Section -->
+            <h2 class="section-heading">Recently Added Notes</h2>
+            <div class="card-container">
+                <div class="card note-item">
+                    <span class="badge badge-new">New</span>
+                    <h3>Biology Chapter 5</h3>
+                    <p>Class 9th | Biology</p>
+                    <div class="button-group">
+                        <a href="#" class="btn btn-view" target="_blank">View Online</a>
+                        <a href="#" class="btn btn-download" download>Download</a>
+                    </div>
+                </div>
+                <div class="card note-item">
+                    <span class="badge badge-new">New</span>
+                    <h3>Computer Chapter 1</h3>
+                    <p>Class 11th | Computer</p>
+                    <div class="button-group">
+                        <a href="#" class="btn btn-view" target="_blank">View Online</a>
+                        <a href="#" class="btn btn-download" download>Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; 2026 Learnify Education | All Rights Reserved
+    </footer>
+
+    <!-- JavaScript File Link -->
+    <script src="js/app.js"></script>
+</body>
+</html>

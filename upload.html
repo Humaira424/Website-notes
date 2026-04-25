@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnify Education - Upload</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo-section">
+            <img src="assets/images/logo.png" alt="Learnify Logo">
+            <h1>Learnify Education</h1>
+        </div>
+        
+        <!-- Centered Links -->
+        <nav class="nav-links-center">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        </nav>
+
+        <!-- Search Bar on Right -->
+        <div class="search-container">
+            <input type="text" id="navSearchInput" class="nav-search" placeholder="Search Subject..." onkeyup="searchFromNav()">
+            <span class="search-icon">🔍</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card" style="margin: 0 auto; width: 450px;">
+            <h2>Upload New PDF Notes</h2>
+            <br>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label>Select Class:</label>
+                    <select id="classSelect">
+                        <option value="9th">Class 9th</option>
+                        <option value="10th">Class 10th</option>
+                        <option value="11th">Class 11th</option>
+                        <option value="12th">Class 12th</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Subject Name:</label>
+                    <input type="text" id="subjectName" placeholder="e.g. Physics, Math" required>
+                </div>
+                <div class="form-group">
+                    <label>Title of Notes:</label>
+                    <input type="text" id="noteTitle" placeholder="e.g. Math Chapter 1" required>
+                </div>
+                <div class="form-group">
+                    <label>PDF File Choose Karein:</label>
+                    <input type="file" id="pdfFile" accept="application/pdf" required>
+                </div>
+                <br>
+                <button type="button" class="btn" onclick="uploadNote()">Upload Note</button>
+            </form>
+            <p id="uploadStatus" style="color: green; margin-top: 10px; display: none;">Note kamyabi se upload ho gaya!</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; 2026 Learnify Education | All Rights Reserved
+    </footer>
+
+    <!-- JavaScript File Link -->
+    <script src="js/app.js"></script>
+    <script src="js/firebase-db.js"></script>
+</body>
+</html>
