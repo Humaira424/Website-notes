@@ -22,6 +22,30 @@ const chapterCounts = {
     }
 };
 
+// --- Theme Toggle Logic ---
+function initTheme() {
+    let isDark = localStorage.getItem('darkMode') === 'true';
+    if(isDark) {
+        document.body.classList.add('dark-mode');
+        updateThemeIcon(true);
+    }
+}
+
+function toggleTheme() {
+    let body = document.body;
+    body.classList.toggle('dark-mode');
+    let isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDark);
+    updateThemeIcon(isDark);
+}
+
+function updateThemeIcon(isDark) {
+    let themeBtn = document.getElementById('themeBtn');
+    if(themeBtn) {
+        themeBtn.innerText = isDark ? '☀️' : '🌙';
+    }
+}
+
 // 1. Dynamic Dropdowns
 function updateSubjects() {
     let classFilter = document.getElementById('classFilter');
@@ -66,20 +90,12 @@ function filterAllSections() {
     // Agar dono Grade aur Subject select ho chuke hain
     if (classFilter !== "All" && subjectFilter !== "All") {
         
-        // Default sections chupayen aur Results section show karein
         defaultSections.style.display = "none";
         filteredChapterResults.style.display = "block";
-        
-        // Heading update karein
         resultsHeading.innerText = `Class ${classFilter} - ${subjectFilter} Chapters`;
-        
-        // Puraane results delete karein
         chaptersContainer.innerHTML = '';
 
-        let totalChapters = chapterCounts[classFilter][subjectFilter] || 10; // 10 is default safe value
-
-        // Asal PDF ka link yahan banaya gaya hai. Aapko assets folder mein 'pdfs' ka folder banana hoga
-        // aur wahan PDF ka naam is tarah rakhna hoga: e.g., "9th_Math_Chapter_1.pdf"
+        let totalChapters = chapterCounts[classFilter][subjectFilter] || 10;
 
         for (let i = 1; i <= totalChapters; i++) {
             let chapterCard = document.createElement('div');
@@ -98,7 +114,6 @@ function filterAllSections() {
         }
 
     } else {
-        // Agar "All" par hai tou wapis default show karo
         defaultSections.style.display = "block";
         filteredChapterResults.style.display = "none";
     }
@@ -108,7 +123,6 @@ function filterAllSections() {
 function searchFromNav() {
     let input = document.getElementById('navSearchInput').value.toLowerCase();
     
-    // Agar hum default section par hain tou wahan search apply karein
     let defaultSections = document.getElementById('defaultSections');
     if(defaultSections && defaultSections.style.display !== "none") {
         let notes = defaultSections.getElementsByClassName('note-item');
@@ -139,8 +153,16 @@ function uploadNote() {
 
 // Page load hoty waqt
 window.addEventListener('DOMContentLoaded', (event) => {
+    initTheme(); // Initialize dark mode if user selected it earlier
+    
     let classFilter = document.getElementById('classFilter');
     if (classFilter) {
+        // Auto select class from URL (e.g., if clicked from navbar dropdown)
+        const urlParams = new URLSearchParams(window.location.search);
+        const grade = urlParams.get('class');
+        if(grade) {
+            classFilter.value = grade;
+        }
         updateSubjects();
     }
 });

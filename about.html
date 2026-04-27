@@ -1,11 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learnify Education - About</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <!-- Header Section -->
@@ -14,17 +17,29 @@
             <img src="assets/images/logo.png" alt="Learnify Logo">
             <h1>Learnify Education</h1>
         </div>
-        
+
         <!-- Centered Links -->
         <nav class="nav-links-center">
             <a href="index.html">Home</a>
+            <div class="dropdown">
+                <a href="#" style="cursor: default;">Classes ▾</a>
+                <div class="dropdown-content">
+                    <a href="notes.html?class=9th">9th Class</a>
+                    <a href="notes.html?class=10th">10th Class</a>
+                    <a href="notes.html?class=11th">11th Class</a>
+                    <a href="notes.html?class=12th">12th Class</a>
+                </div>
+            </div>
             <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
 
         <!-- Search Bar on Right -->
         <div class="search-container">
-            <input type="text" id="navSearchInput" class="nav-search" placeholder="Search Subject..." onkeyup="searchFromNav()">
-            <span class="search-icon">🔍</span>
+            <input type="text" id="navSearchInput" class="nav-search" placeholder="Search Subject..."
+                onkeyup="searchFromNav()">
+            <i class="fas fa-search search-icon"></i>
+            <button id="themeBtn" class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</button>
         </div>
     </header>
 
@@ -32,25 +47,33 @@
     <div class="container">
         <div class="about-content">
             <h2 style="text-align: center; font-size: 32px;">About Us</h2>
-            
+
             <p>
-                Learnify Education is a dedicated online platform designed to support students of Class 9th to 12th in their academic journey. Our aim is to provide easy access to well-organized and high-quality study notes for a wide range of subjects.
+                Learnify Education is a dedicated online platform designed to support students of Class 9th to 12th in
+                their academic journey. Our aim is to provide easy access to well-organized and high-quality study notes
+                for a wide range of subjects.
             </p>
-            
+
             <p>
-                The platform offers notes for subjects including Mathematics, Physics, Computer Science, Biology, Chemistry, Urdu, Islamiyat, and more. These resources are created to help students better understand their concepts, improve their learning, and prepare effectively for exams.
+                The platform offers notes for subjects including Mathematics, Physics, Computer Science, Biology,
+                Chemistry, Urdu, Islamiyat, and more. These resources are created to help students better understand
+                their concepts, improve their learning, and prepare effectively for exams.
             </p>
-            
+
             <p>
-                Learnify Education also encourages collaborative learning by allowing students to upload and share their own notes. This creates a supportive learning environment where students can benefit from each other’s knowledge and experiences.
+                Learnify Education also encourages collaborative learning by allowing students to upload and share their
+                own notes. This creates a supportive learning environment where students can benefit from each otherâ€™s
+                knowledge and experiences.
             </p>
-            
+
             <p>
-                Our mission is to make education more accessible, simple, and effective for every student by bringing all essential study materials together in one place.
+                Our mission is to make education more accessible, simple, and effective for every student by bringing
+                all essential study materials together in one place.
             </p>
-            
+
             <h3 style="text-align: center; font-style: italic;">
-                "At Learnify Education, we believe that every student deserves the opportunity to learn, grow, and succeed."
+                "At Learnify Education, we believe that every student deserves the opportunity to learn, grow, and
+                succeed."
             </h3>
         </div>
     </div>
@@ -63,4 +86,5 @@
     <!-- JavaScript File Link -->
     <script src="js/app.js"></script>
 </body>
+
 </html>

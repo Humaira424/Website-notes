@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,7 +22,17 @@
         <!-- Centered Links -->
         <nav class="nav-links-center">
             <a href="index.html">Home</a>
+            <div class="dropdown">
+                <a href="#" style="cursor: default;">Classes ▾</a>
+                <div class="dropdown-content">
+                    <a href="notes.html?class=9th">9th Class</a>
+                    <a href="notes.html?class=10th">10th Class</a>
+                    <a href="notes.html?class=11th">11th Class</a>
+                    <a href="notes.html?class=12th">12th Class</a>
+                </div>
+            </div>
             <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
         </nav>
 
         <!-- Search Bar on Right -->
@@ -30,6 +40,7 @@
             <input type="text" id="navSearchInput" class="nav-search" placeholder="Search Subject..."
                 onkeyup="searchFromNav()">
             <i class="fas fa-search search-icon"></i>
+            <button id="themeBtn" class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</button>
         </div>
     </header>
 
@@ -41,7 +52,7 @@
             <div class="hero-title">Welcome to Learnify Education</div>
             <div class="hero-tagline">Your Study Partner for Class 9th to 12th</div>
 
-<img src="assets/images/study.jpg" class="hero-img" alt">  
+<img src="assets/images/study.jpg" class="hero-img" alt="study image">  
           <div class="hero-buttons">
                 <a href="upload.html" class="btn">Upload Notes</a>
                 <a href="notes.html" class="btn">View Notes</a>
