@@ -5,13 +5,18 @@
 
 /* --- CSS Variables for Themes --- */
 :root {
-    --bg-color: #fff0f5; /* Very Light Pink (Instead of Peach) */
+    --bg-color: #fff0f5;
+    /* Very Light Pink (Instead of Peach) */
     --text-color: #000000;
-    --header-bg: #ffd1dc; /* Light Pink */
-    --primary-color: #d6336c; /* Dark Pink */
+    --header-bg: #ffd1dc;
+    /* Light Pink */
+    --primary-color: #d6336c;
+    /* Dark Pink */
     --primary-hover: #a61e4d;
-    --card-bg: #ffe4e1; /* Soft Pink for Cards */
-    --card-border: #ffb6c1; /* Pink border */
+    --card-bg: #ffe4e1;
+    /* Soft Pink for Cards */
+    --card-border: #ffb6c1;
+    /* Pink border */
     --input-bg: #ffffff;
     --input-text: #333333;
 }
@@ -21,7 +26,8 @@
     --bg-color: #121212;
     --text-color: #e0e0e0;
     --header-bg: #1f1f1f;
-    --primary-color: #ff85a2; /* Soft pink looks better on dark */
+    --primary-color: #ff85a2;
+    /* Soft pink looks better on dark */
     --primary-hover: #ffb3c6;
     --card-bg: #2a2a2a;
     --card-border: #444444;
@@ -76,11 +82,11 @@ body {
 /* Nav Links (Moved closer to Search Bar) */
 .nav-links-center {
     display: flex;
-    gap: 30px; 
-    justify-content: flex-end; 
+    gap: 30px;
+    justify-content: flex-end;
     align-items: center;
-    flex: 1; 
-    padding-right: 30px; 
+    flex: 1;
+    padding-right: 30px;
 }
 
 .nav-links-center a {
@@ -106,7 +112,7 @@ body {
     position: absolute;
     background-color: var(--header-bg);
     min-width: 130px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 10;
     border-radius: 5px;
     overflow: hidden;
@@ -119,11 +125,11 @@ body {
     text-decoration: none;
     display: block;
     font-size: 16px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .dropdown-content a:hover {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .dropdown:hover .dropdown-content {
@@ -137,7 +143,8 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 15px; /* space between search and theme toggle */
+    gap: 15px;
+    /* space between search and theme toggle */
 }
 
 .nav-search {
@@ -154,7 +161,8 @@ body {
 
 .search-icon {
     position: absolute;
-    right: 50px; /* adjusted because of toggle button */
+    right: 50px;
+    /* adjusted because of toggle button */
     top: 50%;
     transform: translateY(-50%);
     color: var(--primary-color);
@@ -222,7 +230,7 @@ body {
     max-width: 900px;
     height: auto;
     border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* About Content */
@@ -234,7 +242,8 @@ body {
     font-size: 18px;
 }
 
-.about-content h2, .about-content h3 {
+.about-content h2,
+.about-content h3 {
     color: var(--primary-color);
     margin-bottom: 15px;
     margin-top: 20px;
@@ -276,28 +285,28 @@ body {
     display: flex;
     justify-content: flex-start;
     gap: 20px;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     margin-bottom: 30px;
 }
 
 .card {
-    background-color: var(--card-bg); 
-    border: 2px solid var(--card-border); 
+    background-color: var(--card-bg);
+    border: 2px solid var(--card-border);
     border-radius: 12px;
     padding: 20px;
     width: 250px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    position: relative; 
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .card:hover {
-    transform: translateY(-8px); 
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
     border-color: var(--primary-color);
 }
 
@@ -324,7 +333,8 @@ body {
 
 /* Buttons */
 .btn {
-    background-color: var(--primary-color); /* Global dark pink for all buttons like Send Message */
+    background-color: var(--primary-color);
+    /* Global dark pink for all buttons like Send Message */
     color: white;
     padding: 10px 15px;
     border: none;
@@ -342,15 +352,19 @@ body {
 }
 
 .btn-view {
-    background-color: #ff85a2; /* Soft pink for view online */
+    background-color: #ff85a2;
+    /* Soft pink for view online */
 }
+
 .btn-view:hover {
     background-color: #ff6b8b;
 }
 
 .btn-download {
-    background-color: #d6336c; /* Dark pink for download */
+    background-color: #d6336c;
+    /* Dark pink for download */
 }
+
 .btn-download:hover {
     background-color: #a61e4d;
 }
@@ -362,6 +376,7 @@ body {
     background-color: var(--primary-color);
     display: inline-block;
 }
+
 .hero-buttons .btn:hover {
     background-color: var(--primary-hover);
 }
@@ -376,12 +391,20 @@ body {
     font-size: 12px;
     font-weight: bold;
     border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.badge-popular { background-color: #ff4757; }
-.badge-important { background-color: #ffa502; }
-.badge-new { background-color: #2ed573; }
+.badge-popular {
+    background-color: #ff4757;
+}
+
+.badge-important {
+    background-color: #ffa502;
+}
+
+.badge-new {
+    background-color: #2ed573;
+}
 
 /* Forms (Contact & Upload) */
 .form-group {
@@ -396,7 +419,9 @@ body {
     color: var(--text-color);
 }
 
-.form-group input, .form-group select, .form-group textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--card-border);
@@ -425,10 +450,12 @@ body {
         gap: 15px;
         padding: 15px;
     }
+
     .logo-section {
         width: 100%;
         justify-content: center;
     }
+
     .nav-links-center {
         width: 100%;
         justify-content: center;
@@ -436,29 +463,37 @@ body {
         padding-right: 0;
         gap: 15px;
     }
+
     .search-container {
         width: 100%;
         justify-content: center;
     }
+
     .nav-search {
-        width: 100%; /* Search bar full width on mobile */
+        width: 100%;
+        /* Search bar full width on mobile */
     }
+
     .filters-section {
         flex-direction: column;
         align-items: center;
     }
+
     .filter-select {
         width: 100%;
     }
+
     .hero-title {
         font-size: 32px;
         text-align: center;
     }
+
     .hero-buttons {
         flex-direction: column;
         width: 100%;
         align-items: center;
     }
+
     .hero-buttons .btn {
         width: 80%;
         text-align: center;

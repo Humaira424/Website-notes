@@ -46,7 +46,7 @@ function updateThemeIcon(isDark) {
     }
 }
 
-// 1. Dynamic Dropdowns
+// 1. Dynamic Dropdowns for Notes Page
 function updateSubjects() {
     let classFilter = document.getElementById('classFilter');
     if (!classFilter) return; 
@@ -54,13 +54,10 @@ function updateSubjects() {
     let selectedClass = classFilter.value;
     let subjectDropdown = document.getElementById('subjectFilter');
     
-    // Dropdown reset
     subjectDropdown.innerHTML = '<option value="All">Select Subject</option>';
     
     if (selectedClass !== "All" && chapterCounts[selectedClass]) {
         let subjects = Object.keys(chapterCounts[selectedClass]);
-        
-        // Jinke 0 chapters hain (like 11th Pak Study), unko remove karein
         subjects = subjects.filter(sub => chapterCounts[selectedClass][sub] > 0);
 
         subjects.forEach(subject => {
@@ -70,13 +67,36 @@ function updateSubjects() {
             subjectDropdown.appendChild(option);
         });
     }
-    
-    // Automatically trigger filter function
     filterAllSections();
 }
 
-// 2. Generate Chapters on Filter
-function filterAllSections() {
+// 1.5 Dynamic Dropdowns for Upload Page
+function updateUploadSubjects() {
+    let classSelect = document.getElementById('classSelect');
+    if (!classSelect) return; 
+    
+    let selectedClass = classSelect.value;
+    let subjectDropdown = document.getElementById('subjectName');
+    
+    if (!subjectDropdown) return;
+    
+    subjectDropdown.innerHTML = '';
+    
+    if (chapterCounts[selectedClass]) {
+        let subjects = Object.keys(chapterCounts[selectedClass]);
+        subjects = subjects.filter(sub => chapterCounts[selectedClass][sub] > 0);
+
+        subjects.forEach(subject => {
+            let option = document.createElement("option");
+            option.value = subject;
+            option.text = subject;
+            subjectDropdown.appendChild(option);
+        });
+    }
+}
+
+// 2. Fetch Chapters (Firestore Integrated)
+async function filterAllSections() {
     let classFilter = document.getElementById('classFilter').value;
     let subjectFilter = document.getElementById('subjectFilter').value;
     
@@ -87,27 +107,46 @@ function filterAllSections() {
 
     if (!defaultSections || !filteredChapterResults) return;
 
-    // Agar dono Grade aur Subject select ho chuke hain
     if (classFilter !== "All" && subjectFilter !== "All") {
-        
         defaultSections.style.display = "none";
         filteredChapterResults.style.display = "block";
         resultsHeading.innerText = `Class ${classFilter} - ${subjectFilter} Chapters`;
-        chaptersContainer.innerHTML = '';
+        chaptersContainer.innerHTML = '<p style="text-align:center;">Loading Chapters...</p>';
 
+        let uploadedNotes = {};
+        try {
+            const querySnapshot = await db.collection("notes")
+                .where("class", "==", classFilter)
+                .where("subject", "==", subjectFilter)
+                .get();
+            
+            querySnapshot.forEach((doc) => {
+                let data = doc.data();
+                uploadedNotes[data.chapter] = data.url;
+            });
+        } catch (error) {
+            console.error("Error fetching notes:", error);
+        }
+
+        chaptersContainer.innerHTML = '';
         let totalChapters = chapterCounts[classFilter][subjectFilter] || 10;
 
         for (let i = 1; i <= totalChapters; i++) {
             let chapterCard = document.createElement('div');
             chapterCard.className = 'card note-item';
             
-            // Asal PDF links lagaye gaye hain
+            let finalUrl = uploadedNotes[i];
+            let isAvailable = uploadedNotes[i] ? true : false;
+
             chapterCard.innerHTML = `
                 <h3>Chapter ${i}</h3>
                 <p class="class-tag">Class ${classFilter} | ${subjectFilter}</p>
                 <div class="button-group">
-                    <a href="assets/pdfs/${classFilter}_${subjectFilter}_Chapter_${i}.pdf" class="btn btn-view" target="_blank">View Online</a>
-                    <a href="assets/pdfs/${classFilter}_${subjectFilter}_Chapter_${i}.pdf" class="btn btn-download" download>Download</a>
+                    ${isAvailable ? 
+                        `<a href="${finalUrl}" class="btn btn-view" target="_blank">View Online</a>
+                         <a href="${finalUrl}" class="btn btn-download" target="_blank" download>Download</a>` : 
+                        `<button class="btn" style="background: #ccc; cursor: not-allowed;" disabled>Coming Soon</button>`
+                    }
                 </div>
             `;
             chaptersContainer.appendChild(chapterCard);
@@ -122,7 +161,6 @@ function filterAllSections() {
 // 3. Navbar Search
 function searchFromNav() {
     let input = document.getElementById('navSearchInput').value.toLowerCase();
-    
     let defaultSections = document.getElementById('defaultSections');
     if(defaultSections && defaultSections.style.display !== "none") {
         let notes = defaultSections.getElementsByClassName('note-item');
@@ -137,32 +175,65 @@ function searchFromNav() {
     }
 }
 
-// 4. Fake Upload Function
-function uploadNote() {
-    let subject = document.getElementById('subjectName').value;
-    let title = document.getElementById('noteTitle').value;
-    let file = document.getElementById('pdfFile').value;
+// 4. Link-Based Upload Function (No Storage Required)
+async function uploadNote() {
+    const classSelect = document.getElementById('classSelect').value;
+    const subject = document.getElementById('subjectName').value;
+    const title = document.getElementById('noteTitle').value.trim();
+    const chapter = document.getElementById('chapterNumber').value;
+    const pdfLink = document.getElementById('pdfLink').value.trim();
+    const status = document.getElementById('uploadStatus');
 
-    if(subject === "" || title === "" || file === "") {
+    if (!subject || !title || !chapter || !pdfLink) {
         alert("Please sari details fill karein.");
-    } else {
-        document.getElementById('uploadStatus').style.display = "block";
+        return;
+    }
+
+    status.style.display = "block";
+    status.style.color = "blue";
+    status.innerText = "Saving to database... Please wait.";
+
+    try {
+        // Direct save to Firestore (Database)
+        await db.collection("notes").add({
+            class: classSelect,
+            subject: subject,
+            title: title,
+            chapter: parseInt(chapter),
+            url: pdfLink,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        status.style.color = "green";
+        status.innerText = "Link kamyabi se save ho gaya! ✅";
         document.getElementById('uploadForm').reset();
+        
+        // Reset the subject dropdown as well since the form reset will clear the class selection but maybe not trigger the event
+        updateUploadSubjects();
+
+    } catch (error) {
+        console.error("Database Error:", error);
+        status.style.color = "red";
+        status.innerText = "Error: " + error.message;
     }
 }
 
-// Page load hoty waqt
+// Page load
 window.addEventListener('DOMContentLoaded', (event) => {
-    initTheme(); // Initialize dark mode if user selected it earlier
+    initTheme(); 
     
+    // For notes.html
     let classFilter = document.getElementById('classFilter');
     if (classFilter) {
-        // Auto select class from URL (e.g., if clicked from navbar dropdown)
         const urlParams = new URLSearchParams(window.location.search);
         const grade = urlParams.get('class');
-        if(grade) {
-            classFilter.value = grade;
-        }
+        if(grade) classFilter.value = grade;
         updateSubjects();
+    }
+    
+    // For upload.html
+    let classSelect = document.getElementById('classSelect');
+    if (classSelect) {
+        updateUploadSubjects();
     }
 });

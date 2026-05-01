@@ -51,7 +51,7 @@
             <form id="uploadForm">
                 <div class="form-group">
                     <label>Select Class:</label>
-                    <select id="classSelect">
+                    <select id="classSelect" onchange="updateUploadSubjects()">
                         <option value="9th">Class 9th</option>
                         <option value="10th">Class 10th</option>
                         <option value="11th">Class 11th</option>
@@ -60,15 +60,21 @@
                 </div>
                 <div class="form-group">
                     <label>Subject Name:</label>
-                    <input type="text" id="subjectName" placeholder="e.g. Physics, Math" required>
+                    <select id="subjectName" required>
+                        <!-- Populated by JS -->
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Title of Notes:</label>
-                    <input type="text" id="noteTitle" placeholder="e.g. Math Chapter 1" required>
+                    <input type="text" id="noteTitle" placeholder="e.g. Physics Chapter 1" required>
                 </div>
                 <div class="form-group">
-                    <label>PDF File Choose Karein:</label>
-                    <input type="file" id="pdfFile" accept="application/pdf" required>
+                    <label>Chapter Number:</label>
+                    <input type="number" id="chapterNumber" placeholder="e.g. 1" required>
+                </div>
+                <div class="form-group">
+                    <label>PDF Notes Ka Link Paste Karein:</label>
+                    <input type="url" id="pdfLink" placeholder="Yahan link paste karein..." required>
                 </div>
                 <br>
                 <button type="button" class="btn" onclick="uploadNote()">Upload Note</button>
@@ -83,9 +89,14 @@
         &copy; 2026 Learnify Education | All Rights Reserved
     </footer>
 
-    <!-- JavaScript File Link -->
-    <script src="js/app.js"></script>
+    <!-- Firebase SDKs (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-storage-compat.js"></script>
+
+    <!-- Project JS Files -->
     <script src="js/firebase-db.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

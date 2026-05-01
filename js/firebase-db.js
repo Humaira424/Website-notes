@@ -1,10 +1,20 @@
 // js/firebase-db.js
 
-/*
-  Yahan par Firebase ka code ayega jab hum usay properly connect karengay.
-  Abhi isay khali chor rahe hain taake aap pehle HTML/CSS/JS achi tarah seekh sakein.
-  Jab aap pehlay step mein in languages ko samajh lengi, tab hum yahan asli 
-  Firebase ka link add kar ke sach mein PDF files ko online server par upload karna seekhengay.
-*/
+// Firebase configuration from NEW PROJECT
+const firebaseConfig = {
+  apiKey: "AIzaSyBCAFa3AnU0eZKI6jM-nZhzO0D1onPTSvQ",
+  authDomain: "learnify-education-website.firebaseapp.com",
+  projectId: "learnify-education-website",
+  storageBucket: "learnify-education-website.firebasestorage.app",
+  messagingSenderId: "187642155716",
+  appId: "1:187642155716:web:7e7811ca735f43189b2f91",
+  measurementId: "G-SNGMC67GJC"
+};
 
-console.log("Firebase Database link tayyar hai.");
+// Initialize Firebase using CDN approach (compat version)
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+console.log("New Firebase Connected Successfully!");
